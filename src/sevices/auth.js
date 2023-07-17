@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const hashPassword = mat_khau => bcrypt.hashSync(mat_khau, bcrypt.genSaltSync(12))
 
-const registerService =({email, ho_ten, mat_khau})=> new Promise(async (resolve, reject) => {
+const registerService =({email, ho_ten, mat_khau, tuoi, anh_dai_dien})=> new Promise(async (resolve, reject) => {
     try {
         const response = await db.nguoi_dung.findOrCreate({
             where :{email},
@@ -14,6 +14,8 @@ const registerService =({email, ho_ten, mat_khau})=> new Promise(async (resolve,
                 email,
                 ho_ten,
                 mat_khau: hashPassword(mat_khau),
+                tuoi,
+                anh_dai_dien,
                 id: v4()
             }
         })

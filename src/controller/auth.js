@@ -1,9 +1,9 @@
 import * as authService from "../sevices/auth"
 
 const register = async(req,res)=>{
-    const {email, mat_khau, ho_ten} = req.body
+    const {email, mat_khau, ho_ten, tuoi, anh_dai_dien } = req.body
     try {
-        if( !email || !mat_khau || !ho_ten) return res.status(400).json({
+        if( !email || !mat_khau || !ho_ten || !tuoi || !anh_dai_dien) return res.status(400).json({
             err:1,
             msg:'Bạn nhập thiếu trường'    
         })

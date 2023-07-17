@@ -32,7 +32,48 @@ const commentImageService =({hinh_id})=> new Promise(async(resolve,reject)=>{
     }
 })
 
+const getSaveService =({hinh_id})=> new Promise(async(resolve,reject)=>{
+    try {
+        const response = await db.luu_anh.findOne({
+            where :{hinh_id},
+            raw:true,
+        })
+        resolve({
+            err : response ? 0 : 2,
+            msg : response ? 'OK' : 'Hình này chưa được lưu',
+            response 
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+const saveCommentService =({binh_luan_id, nguoi_dung_id, hinh_id, ngay_binh_luan, noi_dung})=> new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.binh_luan.create({
+            defaults:{
+                binh_luan_id,
+                nguoi_dung_id,
+                hinh_id,
+                ngay_binh_luan,
+                noi_dung
+            },
+            raw:true,
+        })
+        resolve({
+            err: response ? 0 :2,
+            msg: response ? 'Comment thành công !' : 'Comment không thành công',
+            response
+        })
+
+    } catch (error) {
+        reject(error)
+    }
+})
+
 export{
     detailImageService,
-    commentImageService
+    commentImageService,
+    getSaveService,
+    saveCommentService
 }
