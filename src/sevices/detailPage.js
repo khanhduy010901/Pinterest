@@ -51,14 +51,12 @@ const getSaveService =({hinh_id})=> new Promise(async(resolve,reject)=>{
 const saveCommentService =({binh_luan_id, nguoi_dung_id, hinh_id, ngay_binh_luan, noi_dung})=> new Promise(async (resolve, reject) => {
     try {
         const response = await db.binh_luan.create({
-            defaults:{
                 binh_luan_id,
                 nguoi_dung_id,
                 hinh_id,
                 ngay_binh_luan,
                 noi_dung
-            },
-            raw:true,
+
         })
         resolve({
             err: response ? 0 :2,
